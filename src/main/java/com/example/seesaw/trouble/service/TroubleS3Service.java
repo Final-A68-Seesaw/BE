@@ -87,12 +87,8 @@ public class TroubleS3Service {
     public void delete(Long troubleId, List<String> imageUrls) {   //imageUrls 는 지우면 안되는 것들
         List<TroubleImage> savedImages = troubleImageRepository.findAllByTroubleId(troubleId);
 
-        for (TroubleImage savedImage: savedImages) {
-            //살리고 싶은 이미지에 기존에 저장된 이미지가 포함되어 있다면, 지워야할 이미지에서 지워라!
-            if(imageUrls != null && imageUrls.contains(savedImage.getTroubleImage())){
-                savedImages.remove(savedImage);
-            }
-        }
+        //살리고 싶은 이미지에 기존에 저장된 이미지가 포함되어 있다면, 지워야할 이미지에서 지워라!
+        savedImages.removeIf(savedImage -> imageUrls != null && imageUrls.contains(savedImage.getTroubleImage()));
 
         for (TroubleImage savedImage : savedImages) {
             if (!savedImage.getTroubleImage().equals("https://myseesaw.s3.ap-northeast-2.amazonaws.com/TroubleBaicCard.svg")) {

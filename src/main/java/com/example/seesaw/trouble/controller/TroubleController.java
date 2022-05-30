@@ -35,8 +35,8 @@ public class TroubleController {
 
     //고민글 수정 시 고민글 조회
     @GetMapping("api/trouble/{troubleId}")
-    public ResponseEntity<TroubleDto> updateTrouble(@PathVariable Long troubleId){
-        TroubleDto troubleDto = troubleService.findTrouble(troubleId);
+    public ResponseEntity<TroubleDto> updateTrouble(@PathVariable Long troubleId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        TroubleDto troubleDto = troubleService.findTrouble(troubleId, userDetails.getUser());
         return ResponseEntity.ok()
                 .body(troubleDto);
     }
@@ -44,7 +44,7 @@ public class TroubleController {
     @PutMapping("api/trouble/{troubleId}")
     public ResponseEntity<String> updateTrouble(
             @RequestPart(value = "troubleRequestDto") TroubleDto troubleDto,
-            @RequestPart(value = "files") List<MultipartFile> files,
+            @RequestPart(value = "files", required = false) List<MultipartFile> files,
             @PathVariable Long troubleId,
             @AuthenticationPrincipal UserDetailsImpl userDetails){
 
@@ -54,8 +54,8 @@ public class TroubleController {
     }
     //고민글 삭제
     @DeleteMapping("/api/trouble/{troubleId}")
-    public ResponseEntity<String> deleteTrouble(@PathVariable Long troubleId){
-        troubleRepository.deleteById(troubleId);
+    public ResponseEntity<String> deleteTrouble(@PathVariable Long troubleId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        troubleService.deleteTrouble(troubleId, userDetails.getUser());
         return ResponseEntity.ok()
                 .body("고민글 삭제완료");
     }

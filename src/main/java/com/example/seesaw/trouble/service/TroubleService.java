@@ -69,12 +69,24 @@ public class TroubleService {
         }
     }
 
-    //고민글 수정 시 정보조회
-    public TroubleDto findTrouble(Long troubleId) {
+    //고민글 작성자 검사
+    public Trouble checkTroubleAndWriter(Long troubleId, User user){
+
         Trouble trouble = troubleRepository.findById(troubleId).orElseThrow(
                 () -> new IllegalArgumentException("고민 Id에 해당하는 글이 없습니다.")
         );
 
+        Long troubleUserId = trouble.getUser().getId();
+        if(!user.getId().equals(troubleUserId)){
+            throw new IllegalArgumentException("작성자가 아니므로 고민글 수정이 불가합니다.");
+        }
+        return trouble;
+    }
+
+    //고민글 수정 시 정보조회
+    public TroubleDto findTrouble(Long troubleId, User user) {
+
+        Trouble trouble = checkTroubleAndWriter(troubleId, user);
 
         List<TroubleTag> troubleTags = troubleTagRepository.findAllByTroubleId(troubleId);
 
@@ -101,14 +113,9 @@ public class TroubleService {
 
     //고민글 수정
     public void updateTrouble(TroubleDto troubleDto, List<MultipartFile> files, Long troubleId, User user) {
-        Trouble trouble = troubleRepository.findById(troubleId).orElseThrow(
-                () -> new IllegalArgumentException("고민 Id에 해당하는 고민글이 없습니다.")
-        );
-        //고민글 작성자 검사
-        Long troubleUserId = trouble.getUser().getId();
-        if(!user.getId().equals(troubleUserId)){
-            throw new IllegalArgumentException("작성자가 아니므로 고민글 수정이 불가합니다.");
-        }
+
+        Trouble trouble = checkTroubleAndWriter(troubleId, user);
+
         checkTrouble(troubleDto);
 
         trouble.update(troubleDto);
@@ -158,7 +165,7 @@ public class TroubleService {
         Trouble trouble = troubleRepository.findById(troubleId).orElseThrow(
                 () -> new IllegalArgumentException("고민 Id에 해당하는 글이 없습니다.")
         );
-        TroubleDto troubleDto = findTrouble(troubleId);
+        TroubleDto troubleDto = findTrouble(troubleId, trouble.getUser());
 
         TroubleDetailResponseDto troubleDetailResponseDto = getTroubleDetailResponseDto(trouble, troubleDto, user1);
 
@@ -230,7 +237,7 @@ public class TroubleService {
         List<TroubleAllResponseDto> troubleAllResponseDtos = new ArrayList<>();
 
         for(Trouble trouble:troubles){
-            TroubleDto troubleDto = findTrouble(trouble.getId());
+            TroubleDto troubleDto = findTrouble(trouble.getId(), trouble.getUser());
             TroubleAllResponseDto troubleAllResponseDto = new TroubleAllResponseDto(troubleDto);
             troubleAllResponseDto.setTroubleId(trouble.getId());
             troubleAllResponseDto.setViews(trouble.getViews());
@@ -257,4 +264,8 @@ public class TroubleService {
         return troubleCommentRequestDto;
     }
 
+    public void deleteTrouble(Long troubleId, User user) {
+        checkTroubleAndWriter(troubleId, user);
+        troubleRepository.deleteById(troubleId);
+    }
 }

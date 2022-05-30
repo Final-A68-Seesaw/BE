@@ -277,9 +277,9 @@ public class PostService {
     public List<PostListResponseDto> findListPosts(int page, User user) {
         List<PostListResponseDto> postListResponseDtos = new ArrayList<>();
 
-        Pageable pageable = PageRequest.of(page - 1, 30);
+        Pageable pageable = PageRequest.of(page -1, 30);
         Page<Post> posts = postRepository.findAllByOrderByCreatedAtDesc(pageable);
-
+        System.out.println("포스트의 사이즌ㄴ 어떤가요응ㅁ?" + posts.getSize());
         for (Post post : posts) {
             PostScrap savedPostScrap = postScrapRepository.findByUserAndPost(user, post);
             boolean scrapStatus = savedPostScrap != null;

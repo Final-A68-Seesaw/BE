@@ -18,7 +18,7 @@ public class TroubleAllResponseDto {
     private String question;
     private String answer;
     private Long views;
-//    private Long commentCount;
+    private Long commentCount;
     private String troubleImages;     // imageUrls -> troubleImages
 
 
@@ -37,7 +37,7 @@ public class TroubleAllResponseDto {
         this.question = trouble.getQuestion();
         this.answer = trouble.getAnswer();
         this.views = trouble.getViews();
-//        this.commentCount = (long) trouble.getTroubleComments().size();
+        this.commentCount = (long) trouble.getTroubleComments().size();
         this.troubleImages = troubleImages;
     }
 }

@@ -92,7 +92,7 @@ public class KakaoUserService {
 
         // 클라이언트 아이디, url 확인
         body.add("client_id", "6f05e336898a8b021c45ac7c1f8770b8");
-        body.add("redirect_uri", "https://play-seeso.com/user/kakao/callback");
+        body.add("redirect_uri", "https://www.play-seeso.com/user/kakao/callback");
         body.add("code", code);
 
         // HTTP 요청 보내기

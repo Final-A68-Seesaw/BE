@@ -87,12 +87,8 @@ public class PostS3Service {
     public void delete(Long postId, List<String> imageUrls) {
         List<PostImage> savedImages = postImageRepository.findAllByPostId(postId);
 
-        for (PostImage savedImage: savedImages) {
-            //살리고 싶은 이미지에 기존에 저장된 이미지가 포함되어 있다면, 지워야할 이미지에서 지워라!
-            if(imageUrls != null && imageUrls.contains(savedImage.getPostImage())){
-                savedImages.remove(savedImage);
-            }
-        }
+        //살리고 싶은 이미지에 기존에 저장된 이미지가 포함되어 있다면, 지워야할 이미지에서 지워라!
+        savedImages.removeIf(savedImage -> imageUrls != null && imageUrls.contains(savedImage.getPostImage()));
 
         for (PostImage savedImage: savedImages){
             if (!savedImage.getPostImage().equals("https://myseesaw.s3.ap-northeast-2.amazonaws.com/DictBasicCard.svg")) {

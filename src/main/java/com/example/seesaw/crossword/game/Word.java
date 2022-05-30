@@ -4,31 +4,31 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Word {
-    /** the coordinates of the first letter of a word on the board **/
+    // 게임판의 단어 첫좌표
     private String position;
 
-    /** the direction of a word on the board **/
+    // 게임판 단어 가로세로 방향
     private Direction direction;
 
-    /** the name of the word **/
+    // 단어 이름
     private String name; //static 으로 바꿔
 
-    /** the clue for the word **/
+    // 단어 힌트 contents
     private String clue;
 
-    /** the order in which to try directions **/
+    //방향정하기 순서
     private ArrayList<Direction> directionIteration;
 
-    /** the number assigned to the word **/
+    // 단어 할당 번호 (사용안함)
     private int num;
 
-    /** make a new word **/
+    // 새 단어를 넣는다.
     public Word(String name) {
         this.name = name;
-        directionIteration = Direction.getRndIteration();
+        directionIteration = Direction.getRndIteration(); // 방향정하기
     }
 
-    //GETTERS//
+    // getter
     public ArrayList<Direction> getDirectionIteration() {
         return directionIteration;
     }
@@ -50,8 +50,7 @@ public class Word {
         return num;
     }
 
-
-    //SETTERS//
+    // setter
     public void setPosition(String position) {
         this.position = position;
     }
@@ -64,7 +63,7 @@ public class Word {
         directionIteration.remove(toRemove);
     }
 
-    /** returns the individual coordinates of the first letter of the word **/
+    // 단어 첫 글자의 좌표 리턴 (첫좌표)
     public int getX() {
         Objects.requireNonNull(position);
         return Utils.getX(position);
@@ -79,8 +78,7 @@ public class Word {
         this.num = num;
     }
 
-
-    /** returns the xTrail of a word **/
+    // 단어의 x 축 흔적을 반환
     public int[] getXTrail() {
         Objects.requireNonNull(position);
         Objects.requireNonNull(direction);
@@ -97,7 +95,7 @@ public class Word {
         return output;
     }
 
-    /** returns the yTrail of a word **/
+    // 단어의 y 축 흔적을 반환
     public int[] getYTrail() {
         Objects.requireNonNull(position);
         Objects.requireNonNull(direction);
@@ -114,11 +112,12 @@ public class Word {
         return output;
     }
 
-    /** makes a clue for the word **/
+    // 단어 힌트 만들기
     private void mkClue() {
         clue = DefinitionGetter.getDefinition(name);
     }
 
+    // 재정의
     @Override
     public String toString() {
         return name;

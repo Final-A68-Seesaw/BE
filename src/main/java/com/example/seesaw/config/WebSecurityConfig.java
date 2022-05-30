@@ -82,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable()
                 .csrf()
                 .disable()
+                .formLogin().disable() // 소셜로그인 수정
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll() // preflight 대응
                 .antMatchers("/oauth/**").permitAll(); // /auth/**에 대한 접근을 인증 절차 없이 허용(로그인 관련 url)
@@ -165,6 +166,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("GET,/api/main/**");
         skipPathList.add("GET,/");
 
+        skipPathList.add("GET,/user/kakao/**");
+        skipPathList.add("POST,/user/kakao/**");
+
         // 채팅 관리 허용 (소켓통신을 위해)
         skipPathList.add("GET,/mainchat/**");
         skipPathList.add("GET,/ws-seesaw/**");
@@ -196,7 +200,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.addAllowedOrigin("http://localhost:3000"); // local 테스트 시
         configuration.addAllowedOrigin("https://main.d3ezz3muzp1rz5.amplifyapp.com"); // 배포 시
         configuration.addAllowedOrigin("https://play-seeso.com"); // 배포 시
+        configuration.addAllowedOrigin("https://www.play-seeso.com"); // 배포 시
+        configuration.addAllowedOrigin("https://play-seeso.com:443"); // 배포 시
+        configuration.addAllowedOrigin("https://www.play-seeso.com:443"); // 배포 시
+        configuration.addAllowedOrigin("https://walbu.shop"); // 배포 시
+        configuration.addAllowedOrigin("https://walbu.shop:443"); // 배포 시
         //configuration.addAllowedOrigin("http://saintrabby.shop.s3-website.ap-northeast-2.amazonaws.com"); // 배포 시
+        configuration.addAllowedOriginPattern("*");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
