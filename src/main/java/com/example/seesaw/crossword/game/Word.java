@@ -78,7 +78,7 @@ public class Word {
         this.num = num;
     }
 
-    // 단어의 x 축 흔적을 반환
+    // 단어의 x좌표들의 배열을 반환
     public int[] getXTrail() {
         Objects.requireNonNull(position);
         Objects.requireNonNull(direction);

@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public enum Direction {
     UP,
-    RIGHT; //MUST NOT START WITH THE SAME LETTER
+    RIGHT; //같은 글자에서 시작하면 안됨.
 
     public static ArrayList<Direction> getRndIteration() {
         ArrayList<Direction> output = new ArrayList<>(Arrays.asList(UP, RIGHT));

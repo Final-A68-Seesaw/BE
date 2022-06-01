@@ -70,19 +70,19 @@ public class Board {
         if ((rightWords>=maxPerDirection) && (upWords>=maxPerDirection)) {
             return false;
         }
-        // 가로 단어가 9개가 넘어가면 제거
+        // 가로 단어가 9개가 넘어가면 가로 제거 -> up 방향으로
         if (rightWords >= maxPerDirection) {
             word.removeDirectionFromIteration(Direction.RIGHT);
         }
-        // 세로단어가 9개가 넘어가면 제거
+        // 세로단어가 9개가 넘어가면 세로 제거 -> right 방향으로
         if (upWords >= maxPerDirection) {
             word.removeDirectionFromIteration(Direction.UP);
         }
-        // wordsOnBoard가 비어있으면
+        // wordsOnBoard가 비어있으면(첫단어일 경우, (3,3)으로 고정, 방향은 랜덤으로 설정)
         if (wordsOnBoard.size() == 0) {
             try {
                 addWord(word, (dim/3) + " " + (dim/3), word.getDirectionIteration().get(0));
-            } catch (Exception e) {
+            } catch (Exception e) { //첫단어가
                 addWord(word, "0 " + dim/2, Direction.RIGHT);
             }
             return true;
@@ -95,13 +95,13 @@ public class Board {
                 continue;
             }
             // 가능한 위치를 찾아라
-            for (String possiblePosition : letterPositions.get(name.charAt(c) + "")) {
+            for (String possiblePosition : letterPositions.get(name.charAt(c) + "")) { //3 4
                 for (Direction direction : word.getDirectionIteration()) {
-                    adjustedPosition = adjustPosition(possiblePosition, direction, c);
+                    adjustedPosition = adjustPosition(possiblePosition, direction, c);  //2 4 시작점의 좌표를 구한다.
                     // 단어 간격이 잘 맞도록 단어를 추가할 수 있는지 확인.
                     if (spacedCanAdd(word, adjustedPosition, direction)) {
                         // 단어 추가 (단어 , 위치, 방향)
-                        addWord(word, adjustedPosition, direction);
+                        addWord(word, adjustedPosition, direction); //단어, 위치, 방향
                         return true;
                     }
                 }
@@ -112,7 +112,7 @@ public class Board {
 
     // 게임판에 단어 추가 메서드
     private void addWord(Word word, String position, Direction direction) {
-        word.setPosition(position); // 위치 변ㅕㅇ
+        word.setPosition(position); // 위치 변경
         word.setDirection(direction); // 방향 변경
         updateLetterPositions(word); // 문자 위치 업데이트
         wordsOnBoard.add(word); // 전체 게임판에 들어갈 단어 추가
@@ -137,15 +137,15 @@ public class Board {
     }
 
     // 지정된 위치에 지정된 문자를 배치하도록 위치 조정 메서드
-    private String adjustPosition(String originalPos, Direction direction, int charOn) {
-        int x = Utils.getX(originalPos);
-        int y = Utils.getY(originalPos);
+    private String adjustPosition(String originalPos, Direction direction, int charOn) { // 3 4, right, 1
+        int x = Utils.getX(originalPos);  //3
+        int y = Utils.getY(originalPos);  //4
         if (direction == Direction.UP) {
             return x + " " + (y-charOn);
         }
         if (direction == Direction.RIGHT) {
 
-            return (x-charOn) + " " + y;
+            return (x-charOn) + " " + y;  //2 4
         }
         throw new IllegalArgumentException("현재 주어진 방향은 : " + direction);
     }
@@ -169,25 +169,25 @@ public class Board {
             } else {
                 currentValue = new ArrayList<>(Arrays.asList(xTrail[c] + " " + yTrail[c]));
             }
-            letterPositions.put(currentKey, currentValue);
+            letterPositions.put(currentKey, currentValue); //어, (3,3) //쩔(3,4), //티(3,5), //비(3,6)
         }
     }
 
     // 단어가 게임판의 지정된 위치에 배치될 수 있는지 확인.
     private boolean tightCanAdd(Word word, String position, Direction direction) {
-        int currentX = Utils.getX(position);
-        int currentY = Utils.getY(position);
-        String name = word.getName();
+        int currentX = Utils.getX(position); //2
+        int currentY = Utils.getY(position); //4
+        String name = word.getName(); //저쩔티비
 
         if ((currentX<0) || (currentY<0)){
             return false;
         }
 
         for (int c=0; c<name.length(); c++) {
-            if ((currentX >= dim) || (currentY >= dim)) {
+            if ((currentX >= dim) || (currentY >= dim)) { //9를 넘으면 false
                 return false;
             }
-            if ((fullBoard[currentX][currentY] != null) &&
+            if ((fullBoard[currentX][currentY] != null) &&  //글자가 차있고, 그 좌표에 같은 글자가 아닐 경우 false
                     (!fullBoard[currentX][currentY].equals(name.charAt(c) + ""))) {
                 return false;
             }
@@ -205,8 +205,8 @@ public class Board {
     }
 
     // 단어 간격이 잘 맞도록 단어를 추가할 수 있는지 확인.
-    private boolean spacedCanAdd(Word word, String position, Direction direction) {
-        if (!tightCanAdd(word, position, direction)) {
+    private boolean spacedCanAdd(Word word, String position, Direction direction) { //단어, 시작좌표, 방향 -> 양사이드가 비어있는지 확인
+        if (!tightCanAdd(word, position, direction)) { //들어갈 수 있는 곳인지 확인
             return false;
         }
 

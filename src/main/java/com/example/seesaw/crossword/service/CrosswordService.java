@@ -32,7 +32,7 @@ public class CrosswordService {
 
     // 게임을 초기화하고 시작하는 메서드
     private void startGame(int dim) {
-        // words 에는 정렬된 txt 파일들의 파일이 있다.
+        // words 에는 정렬된 txt 파일들의 파일(단어들)이 랜덤으로 들어있다.
         // -1 이면 0부터 모든 단어를 가져올 수 있다.
         String[] words = WordsGetter.getRandomWords(-1);
 
