@@ -93,8 +93,8 @@
 <img src="https://img.shields.io/badge/-Java-007396?style=flat&logo=Java">
  <img src="https://img.shields.io/badge/-Spring-000000?style=flat&logo=Spring">
  <img src="https://img.shields.io/badge/-Springboot-000000?style=flat&logo=Springboot">
- <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
- <img src="https://img.shields.io/badge/Redis-4479A1?style=for-the-badge&logo=Redis&logoColor=white">
+ <img src="https://img.shields.io/badge/MySQL-#4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+ <img src="https://img.shields.io/badge/Redis-#DC382D?style=for-the-badge&logo=Redis">
  <img src="https://img.shields.io/badge/aws-4479A1?style=for-the-badge&logo=Aws&logoColor=white">
 
 </br>
