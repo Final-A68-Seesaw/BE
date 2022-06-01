@@ -89,24 +89,21 @@
 <br>
 
 ## 💻백엔드 기술 스택
-<!-- <p align="center">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-<img src="https://img.shields.io/badge/webpack-04ACE6?style=for-the-badge&logo=webpack&logoColor=white">
-<img src="https://img.shields.io/badge/babel-F7A81B?style=for-the-badge&logo=babel&logoColor=white">
-
-</br>
-<img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=react&logoColor=black">
-<img src="https://img.shields.io/badge/ReactHookForm-FF6D70?style=for-the-badge&logo=ReactHookForm&logoColor=white"> 
-<img src="https://img.shields.io/badge/axios-512BD4?style=for-the-badge&logo=axios&logoColor=white"> 
-<img src="https://img.shields.io/badge/styledComponent-DB7093?style=for-the-badge&logo=styledComponent&logoColor=white"> 
-
-</br>
-<img src="https://img.shields.io/badge/AWSAmplify-569A31?style=for-the-badge&logo=AWSAamplify&logoColor=white"> 
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> -->
+<p align="center">
+<img src="https://img.shields.io/badge/-Java-007396?style=flat&logo=Java">
+ <img src="https://img.shields.io/badge/-Spring-000000?style=flat&logo=Spring">
+ <img src="https://img.shields.io/badge/-Springboot-000000?style=flat&logo=Springboot">
+ <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+ <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=Redis&logoColor=white">
+ </br>
+ <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white">
+ <img src="https://img.shields.io/badge/Amazon EC2-569A31?style=for-the-badge&logo=Amazon EC2&logoColor=white">
+ <img src="https://img.shields.io/badge/SSL-721412?style=for-the-badge&logo=SSL&logoColor=white">
+ </br>
+ <img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white">
+ <img src="https://img.shields.io/badge/Socket.js-010101?style=for-the-badge&logo=Socket.js&logoColor=white">
+ <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+ 
 
 </br>
 </p>
